@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        var spreadsheetId = "19O8Az8Sy8n8MI3RqENA1Cs4XbMbY_lMdbshnF2huee0";
+        var range = "Sheet1!A:E";
+        var url = "https://docs.google.com/spreadsheets/d/19O8Az8Sy8n8MI3RqENA1Cs4XbMbY_lMdbshnF2huee0" + spreadsheetId + "/values/" + range + "?key=AIzaSyCS7kCYc30Iidst45uvlAdeG-aE3aOeGP0";
+
+        $.getJSON(url, function(data) {
+          var table = "<table><tr>";
+          var row = data.values[0];
+          for (var i in row) {
+            table += "<th>" + row[i] + "</th>";
+          }
+          table += "</tr>";
+          for (var i = 1; i < data.values.length; i++) {
+            row = data.values[i];
+            table += "<tr>";
+            for (var j in row) {
+              table += "<td>" + row[j] + "</td>";
+            }
+            table += "</tr>";
+          }
+          table += "</table>";
+          $("#tableContainer").html(table);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="tableContainer"></div>
+  </body>
+
+  <script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+</html>
